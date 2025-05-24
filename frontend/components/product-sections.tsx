@@ -127,7 +127,7 @@ export default function ProductSections() {
       <ProductSection
         title="En İndirimli Ürünler"
         sectionId="discounted"
-        viewAllLink="/en-indirimli"
+        viewAllLink="/en-indirimli-urunler"
         products={discountedProducts}
       />
       <ProductSection

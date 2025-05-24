@@ -34,7 +34,7 @@ export default function Header() {
           {/* En İndirimli Ürünler Link */}
           <div className="hidden lg:flex items-center">
             <Link
-              href="/en-indirimli"
+              href="/en-indirimli-urunler"
               className="flex items-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 rounded-xl font-semibold hover:from-red-600 hover:to-orange-600 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               <Percent className="w-5 h-5" />
@@ -132,7 +132,7 @@ export default function Header() {
             {/* En İndirimli Ürünler - Mobile */}
             <div className="mb-4">
               <Link
-                href="/en-indirimli"
+                href="/en-indirimli-urunler"
                 className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 rounded-xl font-semibold w-full"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

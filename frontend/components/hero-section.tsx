@@ -17,7 +17,7 @@ export default function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link href="/en-indirimli">
+            <Link href="/en-indirimli-urunler">
               <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 font-semibold px-8">
                 İndirimleri Keşfet
               </Button>

@@ -34,48 +34,46 @@ const quickCategories = [
 ]
 
 export default function CategoryNavigation() {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [showQuickCategories, setShowQuickCategories] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  // const scrollRef = useRef<HTMLDivElement>(null)
+  // const [showQuickCategories, setShowQuickCategories] = useState(true)
+  // const [lastScrollY, setLastScrollY] = useState(0)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const currentScrollY = window.scrollY
 
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setShowQuickCategories(false)
-      } else {
-        setShowQuickCategories(true)
-      }
+  //     if (currentScrollY > lastScrollY && currentScrollY > 100) {
+  //       setShowQuickCategories(false)
+  //     } else {
+  //       setShowQuickCategories(true)
+  //     }
 
-      setLastScrollY(currentScrollY)
-    }
+  //     setLastScrollY(currentScrollY)
+  //   }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+  //   window.addEventListener("scroll", handleScroll, { passive: true })
+  //   return () => window.removeEventListener("scroll", handleScroll)
+  // }, [lastScrollY])
 
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const scrollAmount = 300
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      })
-    }
-  }
+  // const scroll = (direction: "left" | "right") => {
+  //   if (scrollRef.current) {
+  //     const scrollAmount = 300
+  //     scrollRef.current.scrollBy({
+  //       left: direction === "left" ? -scrollAmount : scrollAmount,
+  //       behavior: "smooth",
+  //     })
+  //   }
+  // }
 
   return (
-    <div className="bg-white border-b border-gray-200 sticky top-20 z-40 transition-all duration-300">
+    <div className="bg-white border-b border-gray-200  top-20 z-40 transition-all duration-300">
       {/* Quick Categories - Hidden on scroll down */}
       <div
-        className={`bg-gradient-to-r from-gray-50 to-gray-100 transition-all duration-300 overflow-hidden ${
-          showQuickCategories ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-        }`}
+        className={`bg-gradient-to-r from-gray-50 to-gray-100 transition-all duration-300 overflow-hidden`}
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div ref={scrollRef} className="flex space-x-4 overflow-x-auto scrollbar-hide flex-1">
+            <div className="flex overflow-x-auto scrollbar-hide flex-1">
               {quickCategories.map((category) => (
                 <Link
                   key={category.id}
@@ -95,11 +93,11 @@ export default function CategoryNavigation() {
               ))}
             </div>
 
-            <div className="hidden md:flex space-x-2 ml-4">
+            {/* <div className="hidden md:flex space-x-2 ml-4">
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => scroll("left")}
+                // onClick={() => scroll("left")}
                 className="rounded-full hover:bg-rose-50 border-rose-200"
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -107,12 +105,12 @@ export default function CategoryNavigation() {
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => scroll("right")}
+                // onClick={() => scroll("right")}
                 className="rounded-full hover:bg-rose-50 border-rose-200"
               >
                 <ChevronRight className="h-4 w-4" />
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

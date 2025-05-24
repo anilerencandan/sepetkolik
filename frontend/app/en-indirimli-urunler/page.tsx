@@ -26,5 +26,5 @@ async function getProducts() {
 export default async function EnIndirimliPage() {
   const products = await getProducts();
 
-  return <CategoryPage category={category} slug="en-indirimli" products={products} />
+  return <CategoryPage category={category} slug="en-indirimli-urunler" products={products} />
 }
