@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model products {
+  id                   BigInt    @id
+  ana_kategori         String
+  alt_kategori         String
+  kategori             String
+  name                 String?
+  slug                 String    @unique
+  url                  String?
+  brand                String?
+  variant_information  Json?
+  shipping_information Json?
+  favorite_count       Int?
+  basket_count         Int?
+  average_rating       Decimal?  @db.Decimal
+  total_count          Int?
+  original_price       Decimal?  @db.Decimal
+  discounted_price     Decimal?  @db.Decimal
+  discount_ratio       Decimal?  @db.Decimal
+  attributes           Json?
+  promotion_badge      String?
+  created_at           DateTime? @db.Timestamp(6)
+  updated_at           DateTime? @db.Timestamp(6)
+  image_url            String?
+
+  @@index([brand], map: "idx_brand")
+  @@index([discount_ratio], map: "idx_discount_ratio")
+}
