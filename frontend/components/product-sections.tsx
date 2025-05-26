@@ -131,7 +131,7 @@ export default function ProductSections() {
         products={discountedProducts}
       />
       <ProductSection
-        title="Çok Satan Ürünler"
+        title="En Popüler Ürünler"
         sectionId="bestselling"
         viewAllLink="/cok-satan"
         products={bestSellingProducts}

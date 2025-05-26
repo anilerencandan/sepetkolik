@@ -34,3 +34,13 @@ model products {
   @@index([brand], map: "idx_brand")
   @@index([discount_ratio], map: "idx_discount_ratio")
 }
+
+model brands {
+  id           Int     @id @default(autoincrement())
+  name         String
+  ana_kategori String?
+  alt_kategori String?
+  kategori     String?
+
+  @@unique([name, ana_kategori, alt_kategori, kategori])
+}

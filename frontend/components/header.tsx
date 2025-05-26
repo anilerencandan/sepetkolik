@@ -54,14 +54,11 @@ export default function Header() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 overflow-x-auto py-3 text-sm scrollbar-hide border-t mt-3 pt-3">
+        <nav className="  justify-between hidden lg:flex lg:justify-between items-center gap-8 overflow-x-auto py-3 text-sm scrollbar-hide mt-3 pt-3">
           <Link
             href="/kategoriler"
-            className="flex items-center gap-2 font-semibold whitespace-nowrap hover:text-rose-500 transition-colors"
+            className="px-3 py-1 bg-gradient-to-r from-rose-500 to-pink-500 text-white flex items-center gap-2 font-semibold whitespace-nowrap rounded-lg hover:bg-opacity-90 transition-colors"
           >
-            <span className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-              YENİ
-            </span>
             TÜM KATEGORİLER
           </Link>
           <Link href="/kategori/kadin" className="whitespace-nowrap hover:text-rose-500 font-medium transition-colors">
@@ -82,12 +79,7 @@ export default function Header() {
           >
             Ev & Yaşam
           </Link>
-          <Link
-            href="/kategori/supermarket"
-            className="whitespace-nowrap hover:text-rose-500 font-medium transition-colors"
-          >
-            Süpermarket
-          </Link>
+
           <Link
             href="/kategori/kozmetik"
             className="whitespace-nowrap hover:text-rose-500 font-medium transition-colors"
@@ -108,20 +100,14 @@ export default function Header() {
           </Link>
           <Link
             href="/cok-satanlar"
-            className="flex items-center gap-2 whitespace-nowrap hover:text-rose-500 font-medium transition-colors"
+            className="bg-gradient-to-r from-orange-500 to-red-500 text-white  flex items-center gap-2 whitespace-nowrap hover:bg-opacity-90 font-medium rounded-lg px-3 py-1 transition-colors"
           >
-            <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-              YENİ
-            </span>
             Çok Satanlar
           </Link>
           <Link
             href="/flas-urunler"
-            className="flex items-center gap-2 whitespace-nowrap hover:text-rose-500 font-medium transition-colors"
+            className="bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center gap-2 whitespace-nowrap text-white px-3 py-1 rounded-lg font-medium transition-colors"
           >
-            <span className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-              YENİ
-            </span>
             Flaş Ürünler
           </Link>
         </nav>
@@ -178,13 +164,6 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Ev & Yaşam
-              </Link>
-              <Link
-                href="/kategori/supermarket"
-                className="p-3 rounded-lg hover:bg-gray-50 font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Süpermarket
               </Link>
               <Link
                 href="/kategori/kozmetik"

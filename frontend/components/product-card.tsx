@@ -4,19 +4,10 @@ import Image from "next/image"
 import { Star, Heart, ExternalLink, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import Product from "@/models/Product"
+import Link from "next/link"
 
-interface Product {
-  id: number
-  title: string
-  originalPrice: number
-  discountedPrice: number
-  discountPercentage: number
-  image: string
-  brand: string
-  rating: number
-  reviewCount: number
-  badges?: string[]
-}
+
 
 interface ProductCardProps {
   product: Product
@@ -44,8 +35,8 @@ export default function ProductCard({ product }: ProductCardProps) {
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
       <div className="relative">
         <Image
-          src={product.image || "/placeholder.svg"}
-          alt={product.title}
+          src={product.image_url || "/placeholder.svg"}
+          alt={product.name}
           width={300}
           height={300}
           className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
@@ -53,11 +44,11 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Discount Badge */}
         <div
-          className={`absolute top-3 left-3 bg-gradient-to-r ${getDiscountColor(product.discountPercentage)} text-white px-3 py-2 rounded-xl shadow-lg`}
+          className={`absolute top-3 left-3 bg-gradient-to-r ${getDiscountColor(product.discount_ratio)} text-white px-3 py-2 rounded-xl shadow-lg`}
         >
           <div className="flex items-center gap-1">
             <Zap className="h-3 w-3" />
-            <span className="text-sm font-bold">%{product.discountPercentage}</span>
+            <span className="text-sm font-bold">%{product.discount_ratio}</span>
           </div>
           <div className="text-xs opacity-90">İNDİRİM</div>
         </div>
@@ -83,7 +74,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="p-5">
         <div className="text-sm text-gray-500 mb-2 uppercase tracking-wide font-medium">{product.brand}</div>
         <h3 className="font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-rose-600 transition-colors leading-tight">
-          {product.title}
+          {product.name}
         </h3>
 
         {/* Rating */}
@@ -93,31 +84,33 @@ export default function ProductCard({ product }: ProductCardProps) {
               <Star
                 key={i}
                 className={`h-3 w-3 ${
-                  i < Math.floor(product.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                  i < Math.floor(product.average_rating ?? 0) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
                 }`}
               />
             ))}
-            <span className="text-sm font-medium text-gray-700 ml-2">{product.rating}</span>
+            <span className="text-sm font-medium text-gray-700 ml-2">{product.average_rating}</span>
           </div>
-          <span className="text-sm text-gray-500 ml-2">({product.reviewCount})</span>
+          <span className="text-sm text-gray-500 ml-2">12</span>
         </div>
 
         {/* Pricing */}
         <div className="mb-5">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-lg text-gray-500 line-through">{formatPrice(product.originalPrice)}</span>
+            <span className="text-lg text-gray-500 line-through">{formatPrice(product.original_price)}</span>
             <div className="bg-green-100 text-green-700 px-2 py-1 rounded-lg text-xs font-bold">
-              {formatPrice(product.originalPrice - product.discountedPrice)} tasarruf
+              {formatPrice(product.original_price - product.discounted_price)} tasarruf
             </div>
           </div>
-          <div className="text-2xl font-bold text-rose-600">{formatPrice(product.discountedPrice)}</div>
+          <div className="text-2xl font-bold text-rose-600">{formatPrice(product.discounted_price)}</div>
         </div>
 
         {/* Action Button */}
-        <Button className="w-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
-          <ExternalLink className="h-4 w-4 mr-2" />
-          Trendyol'da Gör
-        </Button>
+        <Link href={product.url || "#"} target="_blank" rel="noopener noreferrer">
+          <Button className="w-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
+            <ExternalLink  className="h-4 w-4 mr-2" />
+            Trendyol'da Gör
+          </Button>
+        </Link>
       </div>
     </div>
   )

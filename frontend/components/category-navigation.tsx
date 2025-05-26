@@ -73,7 +73,7 @@ export default function CategoryNavigation() {
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex overflow-x-auto scrollbar-hide flex-1">
+            <div className="flex justify-between overflow-x-auto scrollbar-hide flex-1">
               {quickCategories.map((category) => (
                 <Link
                   key={category.id}
