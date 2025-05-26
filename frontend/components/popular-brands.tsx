@@ -1,27 +1,85 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 
-interface Brand {
-  name: string;
-  logo: string;
-  favorite_count: number;
-}
+const popularBrands = [
+  {
+    id: 1,
+    name: "Nike",
+    logo: "/brands/nike.png",
+  },
+  {
+    id: 2,
+    name: "Zara",
+    logo: "/brands/zara.png",
+  },
+  {
+    id: 3,
+    name: "Apple",
+    logo: "/brands/apple.png",
+  },
+  {
+    id: 4,
+    name: "Adidas",
+    logo: "/brands/adidas.png",
+  },
+  {
+    id: 5,
+    name: "Samsung",
+    logo: "/brands/koton.png",
+  },
+  {
+    id: 6,
+    name: "Pull&Bear",
+    logo: "/brands/koton.png",
+  },
+  {
+    id: 7,
+    name: "Koton",
+    logo: "/brands/koton.png",
+  },
+  {
+    id: 8,
+    name: "Bershka",
+    logo: "/brands/koton.png",
+  },
+  {
+    id: 9,
+    name: "Koton",
+    logo: "/brands/koton.png",
+  },
+  {
+    id: 10,
+    name: "Xiomi",
+    logo: "/brands/koton.png",
+  },
+  {
+    id: 11,
+    name: "Philiphs",
+    logo: "/brands/koton.png",
+  },
+  {
+    id: 12,
+    name: "Dyson",
+    logo: "/brands/koton.png",
+  }
+  // ... buraya sen istediğin markaları ekle
+];
 
 export default function PopularBrands() {
-  const [brands, setBrands] = useState<Brand[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    fetch("/api/products")
-      .then((res) => res.json())
-      .then((data) => setBrands(data))
-      .catch((err) => console.error("Popüler markalar alınamadı", err));
-  }, []);
-
-
+  const scroll = (dir: "left" | "right") => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: dir === "left" ? -300 : 300,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <section className="py-16 bg-gray-50">
@@ -29,7 +87,7 @@ export default function PopularBrands() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Popüler Markalar</h2>
-            <p className="text-gray-600">Favorilenme sayısına göre sıralı</p>
+            <p className="text-gray-600">Senin seçtiğin favori markalar</p>
           </div>
           <div className="hidden md:flex space-x-2">
             <Button variant="outline" size="icon" onClick={() => scroll("left")}>
@@ -42,11 +100,12 @@ export default function PopularBrands() {
         </div>
 
         <div
-          
+          ref={scrollRef}
+          className="flex space-x-4 overflow-x-auto scrollbar-hide pb-4"
         >
-          {brands.map((brand, idx) => (
+          {popularBrands.map((brand) => (
             <div
-              key={idx}
+              key={brand.id}
               className="min-w-[200px] bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition group hover:-translate-y-1"
             >
               <div className="bg-gray-50 rounded-lg p-4 mb-4 group-hover:bg-gray-100 transition-colors">
@@ -59,7 +118,7 @@ export default function PopularBrands() {
                 />
               </div>
               <h3 className="font-semibold text-gray-900 text-center">{brand.name}</h3>
-              <p className="text-sm text-gray-500 text-center">{brand.totalFavorites} favori</p>
+              <p className="text-sm text-gray-500 text-center">{brand.favorite_count} favori</p>
             </div>
           ))}
         </div>

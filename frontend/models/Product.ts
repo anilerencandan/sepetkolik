@@ -1,5 +1,5 @@
 export default interface Product {
-  id: string
+  id: number
   name: string
   image_url: string
   original_price: number

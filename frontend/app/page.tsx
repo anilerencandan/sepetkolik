@@ -11,8 +11,8 @@ export default function HomePage() {
     <main className="min-h-screen bg-gray-50">
       <CategoryNavigation />
       <HeroSection />
-      <PopularBrands />
       <ProductSections />
+      <PopularBrands />
       <CategoryGrid />
       <div className="container mx-auto mt-8">
       <h2 className="text-2xl font-bold mb-4">En Çok Favorilenen 20 Ürün</h2>

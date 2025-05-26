@@ -57,18 +57,7 @@ function ProductSection({ title, products, sectionId, viewAllLink }: ProductSect
             {products.map((product) => (
               <div key={product.id} className="flex-shrink-0 w-72">
                 <ProductCard
-                  product={{
-                    id: product.id,
-                    title: product.name,
-                    image: product.image_url,
-                    originalPrice: product.original_price,
-                    discountedPrice: product.discounted_price,
-                    discountPercentage: Math.round(product.discount_ratio),
-                    brand: product.brand,
-                    rating: product.average_rating || 0,
-                    reviewCount: product.total_count || 0,
-                    badges: product.promotion_badge ? [product.promotion_badge] : [],
-                  }}
+                  product={product}
                 />
               </div>
             ))}
@@ -105,14 +94,14 @@ export default function ProductSections() {
       const res = await fetch("/api/products")
       const all: Product[] = await res.json()
 
-      const discounted = [...all]
-        .filter((p) => p.discount_ratio >= 40)
-        .sort((a, b) => b.discount_ratio - a.discount_ratio)
+      const discounted = all
+        .filter((p) => Number(p.discount_ratio) >= 40)
+        .sort((a, b) => Number(b.discount_ratio) - Number(a.discount_ratio))
         .slice(0, 10)
 
-      const bestSelling = [...all]
-        .filter((p) => p.favorite_count && p.favorite_count > 0)
-        .sort((a, b) => (b.favorite_count || 0) - (a.favorite_count || 0))
+        const bestSelling = all
+        .filter((p) => Number(p.discount_ratio) >= 5 && p.average_rating) // %5 indirim ve rating varsa
+        .sort((a, b) => (b.average_rating || 0) - (a.average_rating || 0)) // rating'e göre sırala
         .slice(0, 10)
 
       setDiscountedProducts(discounted)
